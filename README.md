@@ -1,11 +1,29 @@
-# SQL-Project
-Restaurant Operations Analysis 
 
 # SQL Menu Sales Analysis Project
 
-## 📊 Project Overview
+## Project Overview
 
 This project explores sales and ordering patterns from a restaurant menu dataset using SQL. The goal is to uncover insights about menu performance, customer behavior, and revenue trends. The findings help stakeholders identify best‑selling items, underperforming items, and peak business hours.
+
+## Executive Summary
+
+This SQL analytics project evaluates customer behaviour and purchasing patterns following the launch of a new restaurant menu. Using transactional order data, the analysis identifies top-performing menu items, popular categories, revenue drivers, and time-based ordering trends.
+
+The insights generated from this project help stakeholders understand what customers prefer, which items generate the most revenue, and where operational or pricing adjustments may improve overall performance. The project demonstrates practical SQL analytics skills using aggregations, joins, subqueries, CTEs, and window functions.
+
+## Business Problem
+
+After introducing a new menu, the restaurant needs data-driven insights to evaluate its success. Management wants to understand:
+
+- Which menu items are most popular among customers
+- Which categories perform best by volume and revenue
+- Whether premium-priced items are being ordered
+- What times of day experience the highest demand
+- Which items underperform or are never ordered
+
+Without this analysis, decisions around menu optimization, pricing strategy, inventory planning, and staff scheduling would rely on assumptions rather than evidence.
+
+This project addresses these challenges by analysing historical order data to uncover customer preferences and sales trends.
 
 ---
 
@@ -44,6 +62,24 @@ Detect menu items with zero recorded sales—useful for menu optimization or pro
 Track monthly revenue totals to observe growth patterns, seasonal changes, or dips in sales.
 
 ---
+
+# Business Value
+
+The insights from this project enable the restaurant to:
+
+-Promote best-selling and high-revenue items
+-Review or remove items that do not sell
+-Optimize pricing tiers and menu structure
+-Improve staff scheduling during peak hours
+-Support future menu launches with historical evidence
+
+## Strategic Recommendations
+
+-Promote top-performing items through featured placements and meal bundles
+-Rationalize the menu by reviewing or removing unsold items
+-Leverage premium pricing where customers already show willingness to pay
+-Optimize staffing levels during identified peak hours
+-Use daily and monthly trends to guide inventory planning and promotions
 
 ## 🛠️ SQL Skills Demonstrated
 
