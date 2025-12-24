@@ -31,7 +31,9 @@ This project addresses these challenges by analysing historical order data to un
 
 ### **1. Total Number of Times Each Menu Item Was Ordered**
 
-Identify how often each menu item appears in customer orders to discover the most frequently ordered items.
+![Executive Overview](https://github.com/ZakheniAnalyst/SQL-Project/blob/main/The%20top-selling%20item%20for%20each%20day.png)
+
+Identified how often each menu item appears in customer orders to discover the most frequently ordered items.
 
 ### **2. Number of Times Each Category Was Ordered**
 
