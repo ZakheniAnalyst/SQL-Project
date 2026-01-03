@@ -37,34 +37,95 @@ Identified how often each menu item appears in customer orders to discover the m
 
 ### **2. Number of Times Each Category Was Ordered**
 
-Analyze order counts grouped by menu category (e.g., Drinks, Mains, Desserts) to understand category-level performance.
+```sql
+SELECT 
+    mi.item_name,
+    COUNT(od.order_id) AS total_orders
+FROM order_details od
+JOIN menu_items mi
+ON od.item_id = mi.menu_item_id
+GROUP BY mi.item_name
+ORDER BY total_orders DESC;
 
-### **3. Top-Performing Menu Items by Revenue**
+````
+
+### 3.  Categories with more than 100 orders (Shows only high-volume categories using the HAVING clause.)
+
+```sql
+SELECT 
+    mi.category,
+    COUNT(od.order_id) AS total_orders
+FROM order_details od
+JOIN menu_items mi 
+ON od.item_id = mi.menu_item_id
+GROUP BY mi.category
+HAVING COUNT(od.order_id) > 100
+ORDER BY total_orders DESC;
+````
+
+### **4. Top-Performing Menu Items by Revenue**
 
 Calculate revenue per menu item using price × quantity, then rank items by total revenue generated.
 
-### **4. Top 5 Most Ordered Items**
+### **5. Top 5 Most Ordered Items**
 
 Highlight the best-selling items based on order frequency.
 
-### **5. Top-Selling Item for Each Day**
+### **6. Top-Selling Item for Each Day**
 
 Determine the highest‑selling menu item for each calendar day to understand daily customer preferences.
 
-### **6. Busiest Hour of the Day**
+### **7. Busiest hour of the day (Discover when customers order the most.)**
+```sql
+SELECT  
+    HOUR(STR_TO_DATE(order_time, '%H:%i:%s')) AS hour_of_day,
+    COUNT(order_id) AS total_orders
+FROM order_details
+GROUP BY hour_of_day
+ORDER BY total_orders DESC
+LIMIT 1;
+Identified peak ordering hours by grouping orders by hour to understand when customer traffic is highest.
+-- Insight: Helps in scheduling staff efficiently.
+```
 
-Identify peak ordering hours by grouping orders by hour to understand when customer traffic is highest.
-
-### **7. Items That Were Never Ordered**
+### **8. Items That Were Never Ordered**
 
 Detect menu items with zero recorded sales—useful for menu optimization or promotional strategies.
 
-### **8. Monthly Revenue Trend**
+### **9. Monthly Revenue Trend**
 
-Track monthly revenue totals to observe growth patterns, seasonal changes, or dips in sales.
+Tracked monthly revenue totals to observe growth patterns, seasonal changes, or dips in sales.
+```sql
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(order_date, '%d/%m/%Y'), '%Y-%m') AS month,
+    ROUND(SUM(mi.price),2) AS total_revenue
+FROM order_details od
+JOIN menu_items mi 
+ON od.item_id = mi.menu_item_id
+GROUP BY month
+ORDER BY month;
+```
+ Monthly revenue trend (Tracking revenue by month to spot growth or decline.)
 
----
 
+### 10.
+-- Top 3 selling items per category (Using RANK(Window Function) to find leading items in each category)
+
+```sql
+SELECT category, item_name, total_orders
+FROM (
+    SELECT 
+        mi.category,
+        mi.item_name,
+        COUNT(od.order_id) AS total_orders,
+        RANK() OVER (PARTITION BY mi.category ORDER BY COUNT(od.order_id) DESC) AS category_rank
+    FROM order_details od
+    JOIN menu_items mi 
+    ON od.item_id = mi.menu_item_id
+    GROUP BY mi.category, mi.item_name
+) ranked
+WHERE category_rank <= 3;
+```
 # Business Value
 
 The insights from this project enable the restaurant to:
